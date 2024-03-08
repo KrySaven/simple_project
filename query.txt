@@ -1,0 +1,605 @@
+ALTER TABLE `loans`
+CHANGE COLUMN `customer_id` `dealer_id`  int(10) UNSIGNED NULL DEFAULT NULL AFTER `date`,
+CHANGE COLUMN `branch_id` `branchdealer_id`  int(10) UNSIGNED NULL DEFAULT NULL AFTER `dealer_id`;
+
+=================================
+ALTER TABLE `loans`
+ADD COLUMN `title`  varchar(255) NULL AFTER `id`;
+============= Date 11-08-2019 ============
+ALTER TABLE `payments`
+ADD COLUMN `is_complete`  tinyint(1) NOT NULL DEFAULT 0 AFTER `status`,
+ADD COLUMN `complete_by`  varchar(100) NULL AFTER `is_complete`,
+ADD COLUMN `complete_data`  datetime NULL AFTER `complete_by`;
+======= Date 18-08-2019==============
+ALTER TABLE `payments` 
+ADD COLUMN `is_follow` tinyint(1) DEFAULT 0 AFTER `complete_data`, 
+ADD COLUMN `follow_by` varchar(100) AFTER `is_follow`, 
+ADD COLUMN `follow_date` datetime AFTER `follow_by`;
+==================
+ALTER TABLE `payments` ADD COLUMN `note` varchar(250) AFTER `follow_date`;
+=================
+ALTER TABLE `sales` 
+ADD COLUMN `is_black_list` tinyint(1) DEFAULT 0 AFTER `is_complete`, 
+ADD COLUMN `black_list_by` varchar(100) AFTER `is_black_list`;
+================
+ALTER TABLE `payments`
+CHANGE COLUMN `complete_data` `complete_date`  datetime NULL DEFAULT NULL AFTER `complete_by`
+======= Date 13-10-2019 =======
+ALTER TABLE `payments` ADD COLUMN `payment_type` varchar(10) DEFAULT '' AFTER `status`;
+========================= Date 31-07-2020 ==================
+ALTER TABLE `siteprofiles`
+ADD COLUMN `map`  varchar(255) NULL AFTER `facebook`,
+ADD COLUMN `line`  varchar(255) NULL AFTER `map`;
+============ Date 06-08-2020 ======================
+ALTER TABLE `customers`
+ADD COLUMN `name_kh`  varchar(250) NULL AFTER `type`,
+ADD COLUMN `gender`  varchar(10) NULL AFTER `name`,
+ADD COLUMN `date_of_birth`  date NULL AFTER `gender`,
+ADD COLUMN `issued_by`  varchar(250) NULL AFTER `identity_number`,
+ADD COLUMN `nationality`  varchar(100) NULL AFTER `issued_by`,
+ADD COLUMN `family_status`  varchar(50) NULL AFTER `nationality`,
+ADD COLUMN `house_no`  varchar(20) NULL AFTER `active`,
+ADD COLUMN `street_no`  varchar(20) NULL AFTER `house_no`,
+ADD COLUMN `add_group`  varchar(50) NULL AFTER `street_no`,
+ADD COLUMN `province_id`  int(10) NULL AFTER `add_group`,
+ADD COLUMN `district_id`  int(10) NULL AFTER `province_id`,
+ADD COLUMN `commune_id`  int(10) NULL AFTER `district_id`,
+ADD COLUMN `village_id`  int(10) NULL AFTER `commune_id`,
+ADD COLUMN `personal_ownership`  varchar(100) NULL AFTER `village_id`,
+ADD COLUMN `facebook_name`  varchar(100) NULL AFTER `personal_ownership`,
+ADD COLUMN `facebook_link`  varchar(250) NULL AFTER `facebook_name`,
+ADD COLUMN `work_company`  varchar(200) NULL AFTER `facebook_link`,
+ADD COLUMN `work_role`  varchar(120) NULL AFTER `work_company`,
+ADD COLUMN `work_salary`  decimal(10,2) NULL AFTER `work_role`,
+ADD COLUMN `work_house_no`  varchar(20) NULL AFTER `work_salary`,
+ADD COLUMN `work_street_no`  varchar(50) NULL AFTER `work_house_no`,
+ADD COLUMN `work_group`  varchar(100) NULL AFTER `work_street_no`,
+ADD COLUMN `work_province_id`  int(10) NULL AFTER `work_group`,
+ADD COLUMN `work_district_id`  int(10) NULL AFTER `work_province_id`,
+ADD COLUMN `work_commune_id`  int(10) NULL AFTER `work_district_id`,
+ADD COLUMN `work_village_id`  int(10) NULL AFTER `work_commune_id`,
+ADD COLUMN `business_occupation`  varchar(255) NULL AFTER `work_village_id`,
+ADD COLUMN `business_term`  varchar(255) NULL AFTER `business_occupation`,
+ADD COLUMN `business_house_no`  varchar(50) NULL AFTER `business_term`,
+ADD COLUMN `business_street_no`  varchar(50) NULL AFTER `business_house_no`,
+ADD COLUMN `business_group`  varchar(150) NULL AFTER `business_street_no`,
+ADD COLUMN `business_province_id`  int(10) NULL AFTER `business_group`,
+ADD COLUMN `business_district_id`  int(10) NULL AFTER `business_province_id`,
+ADD COLUMN `business_commune_id`  int(10) NULL AFTER `business_district_id`,
+ADD COLUMN `business_village_id`  int(10) NULL AFTER `business_commune_id`;
+=================
+ALTER TABLE `customers`
+ADD COLUMN `family_status_other`  varchar(255) NULL AFTER `family_status`;
+=============
+ALTER TABLE `sales`
+ADD COLUMN `inv_no`  varchar(50) NULL AFTER `timeline_id`;
+============
+ALTER TABLE `customers`
+CHANGE COLUMN `family_status_other` `education_level_other`  varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL AFTER `family_status`,
+ADD COLUMN `education_level`  varchar(50) NULL AFTER `family_status`;
+==========================
+ALTER TABLE `dealers`
+ADD COLUMN `name_kh`  varchar(255) NULL AFTER `salesman_id`,
+ADD COLUMN `gender`  varchar(20) NULL AFTER `name`,
+ADD COLUMN `date_of_birth`  date NULL AFTER `gender`,
+ADD COLUMN `identity_number`  varchar(50) NULL AFTER `email`,
+ADD COLUMN `issued_by`  varchar(255) NULL AFTER `identity_number`,
+ADD COLUMN `house_no`  varchar(50) NULL AFTER `remember_token`,
+ADD COLUMN `street_no`  varchar(50) NULL AFTER `house_no`,
+ADD COLUMN `add_group`  varchar(100) NULL AFTER `street_no`,
+ADD COLUMN `province_id`  int(10) NULL AFTER `add_group`,
+ADD COLUMN `district_id`  int(10) NULL AFTER `province_id`,
+ADD COLUMN `commune_id`  int(10) NULL AFTER `district_id`,
+ADD COLUMN `village_id`  int(10) NULL AFTER `commune_id`;
+=======================
+ALTER TABLE `sales`
+ADD COLUMN `dealer_id`  int(10) NULL AFTER `customer_id`,
+ADD COLUMN `dealer_relation`  varchar(50) NULL AFTER `black_list_by`,
+ADD COLUMN `dealer_relation_other`  varchar(255) NULL AFTER `dealer_relation`;
+===============
+ALTER TABLE `sales`
+ADD COLUMN `first_payment`  date NULL AFTER `date`;
+=====================================
+ALTER TABLE `sales`
+ADD COLUMN `icloud_username`  varchar(255) NULL AFTER `dealer_relation_other`,
+ADD COLUMN `icloud_passwoed`  varchar(255) NULL AFTER `icloud_username`;
+================
+ALTER TABLE `sales`
+ADD COLUMN `update_icloud_date`  datetime NULL AFTER `icloud_passwoed`,
+ADD COLUMN `update_icoude_by`  varchar(50) NULL AFTER `update_icloud_date`;
+==================
+ALTER TABLE `sales`
+MODIFY COLUMN `update_icoude_by`  int(10) NULL DEFAULT NULL AFTER `update_icloud_date`;
+======================================
+ALTER TABLE `siteprofiles`
+ADD COLUMN `is_ceil`  tinyint(1) NULL DEFAULT 0 AFTER `line`;
+========================================
+ALTER TABLE `transactions`
+MODIFY COLUMN `amount_usd`  decimal(11,3) NULL AFTER `date`,
+MODIFY COLUMN `amount_riel`  decimal(18,3) NULL AFTER `amount_usd`,
+MODIFY COLUMN `exchange`  decimal(8,2) NULL AFTER `amount_riel`,
+MODIFY COLUMN `status`  varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL AFTER `is_close`,
+MODIFY COLUMN `description`  varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL AFTER `status`,
+ADD COLUMN `interest_usd`  decimal(10,3) NULL AFTER `amount_riel`,
+ADD COLUMN `interest_riel`  decimal(18,2) NULL AFTER `interest_usd`,
+ADD COLUMN `payment_detail_id`  int(10) NULL AFTER `payment_id`;
+===========================
+ALTER TABLE `transactions`
+ADD COLUMN `bank_id`  int(10) NULL AFTER `expen_id`;
+========================= Date 14-08-2020 ==================================================================
+ALTER TABLE `timelines`
+ADD COLUMN `payment_type`  varchar(50) NULL AFTER `name`,
+ADD COLUMN `duration`  int(8) NULL AFTER `payment_type`,
+ADD COLUMN `first_payment`  decimal(8,2) NULL AFTER `duration`;
+===========
+ALTER TABLE `timelines`
+MODIFY COLUMN `duration`  int(8) NULL DEFAULT NULL AFTER `payment_type`;
+================================
+ALTER TABLE `transactions`
+ADD COLUMN `income_id`  int(10) NULL AFTER `expen_id`;
+==============
+ALTER TABLE `siteprofiles`
+ADD COLUMN `is_income`  tinyint(1) NULL DEFAULT 0 AFTER `is_ceil`;
+=====================================
+ALTER TABLE `dealers`
+ADD COLUMN `bank_name`  varchar(50) NULL AFTER `company`,
+ADD COLUMN `bank_number`  varchar(50) NULL AFTER `bank_name`;
+==================
+ALTER TABLE `siteprofiles`
+ADD COLUMN `is_penalty`  tinyint(1) NULL DEFAULT 0 AFTER `is_income`,
+ADD COLUMN `penalty_per_day`  decimal(8,2) NULL AFTER `is_penalty`;
+===============
+ALTER TABLE `transactions`
+ADD COLUMN `investment_id`  int(10) NULL AFTER `close_balance_id`;
+=================
+ALTER TABLE `users`
+ADD COLUMN `is_active`  tinyint(1) NULL DEFAULT 1 AFTER `profile`,
+ADD COLUMN `is_co`  tinyint(1) NULL DEFAULT 0 AFTER `is_active`;
+================
+ALTER TABLE `sales`
+ADD COLUMN `co_id`  int(10) NULL AFTER `dealer_id`;
+
+============== Date 26-102020 =============
+ALTER TABLE `sales`
+ADD COLUMN `commission_type`  varchar(50) NULL AFTER `update_icoude_by`,
+ADD COLUMN `commission`  decimal(18,2) NULL AFTER `commission_type`,
+ADD COLUMN `original_file`  varchar(255) NULL AFTER `commission`,
+ADD COLUMN `phone_type`  varchar(20) NULL AFTER `original_file`,
+ADD COLUMN `iem`  varchar(50) NULL AFTER `phone_type`;
+=======================================
+ALTER TABLE `siteprofiles`
+ADD COLUMN `owner_name`  varchar(255) NULL AFTER `company`;
+====================
+ALTER TABLE `siteprofiles`
+MODIFY COLUMN `is_penalty`  tinyint(1) NOT NULL DEFAULT 0 AFTER `is_income`,
+ADD COLUMN `is_penalty_percentage`  tinyint(1) NOT NULL DEFAULT 0 AFTER `is_penalty`;
+=========================
+ALTER TABLE `payments`
+ADD INDEX `sale_id_index` (`sale_id`) USING BTREE ,
+ADD INDEX `timeline_id_index` (`timeline_id`) USING BTREE ;
+===========
+ALTER TABLE `sales`
+ADD INDEX `customer_id_index` (`customer_id`) USING BTREE ,
+ADD INDEX `customer_id` (`timeline_id`) USING BTREE ;
+=================
+ALTER TABLE `siteprofiles`
+ADD COLUMN `number_penalty_month`  int(2) NULL AFTER `penalty_per_day`;
+==============
+ALTER TABLE `payments`
+ADD COLUMN `paid_off_interest`  decimal(8,2) NULL AFTER `active`,
+ADD COLUMN `paid_off_capital`  decimal(8,2) NULL AFTER `paid_off_interest`,
+ADD COLUMN `total_paid_off`  decimal(8,2) NULL AFTER `paid_off_capital`,
+ADD COLUMN `paid_interest_id`  int(11) NULL AFTER `total_paid_off`,
+ADD COLUMN `paid_capital_id`  int(11) NULL AFTER `paid_interest_id`,
+ADD COLUMN `paid_off_by`  varchar(50) NULL AFTER `paid_capital_id`,
+ADD COLUMN `paid_off_date`  datetime NULL AFTER `paid_off_by`;
+====================
+ALTER TABLE `payments`
+MODIFY COLUMN `paid_interest_id`  varchar(50) NULL DEFAULT NULL AFTER `total_paid_off`,
+MODIFY COLUMN `paid_capital_id`  varchar(50) NULL DEFAULT NULL AFTER `paid_interest_id`;
+==============
+License plate
+Color
+Model
+លតាប័ត្រ
+Taxi Number
+Engine number
+Cylinder size
+Year of manufacture
+First card issuance date
+Market Price
+Hot Sale
+Pawn Amount
+=======Sale Table Alter=====
+ALTER TABLE `bdvp`.`sales` 
+ADD COLUMN `license_plate` VARCHAR(255) NULL DEFAULT NULL AFTER `deleter_id`,
+ADD COLUMN `color` VARCHAR(255) NULL DEFAULT NULL AFTER `license_plate`,
+ADD COLUMN `make_model` VARCHAR(255) NULL DEFAULT NULL AFTER `color`,
+ADD COLUMN `tax_stamp` VARCHAR(255) NULL DEFAULT NULL AFTER `make_model`,
+ADD COLUMN `vin` VARCHAR(255) NULL DEFAULT NULL AFTER `tax_stamp`,
+ADD COLUMN `cylineder_size` VARCHAR(255) NULL DEFAULT NULL AFTER `vin`,
+ADD COLUMN `year` VARCHAR(100) NULL DEFAULT NULL AFTER `cylineder_size`,
+ADD COLUMN `first_card_issuance_date` DATE NULL DEFAULT NULL AFTER `year`,
+ADD COLUMN `market_price` DECIMAL(8,2) NULL DEFAULT NULL AFTER `first_card_issuace_date`,
+ADD COLUMN `hot_price` DECIMAL(8,2) NULL DEFAULT NULL AFTER `market_price`,
+ADD COLUMN `salescol` VARCHAR(45) NULL AFTER `hot_price`;
+======
+ALTER TABLE `bdvp`.`sales` 
+ADD COLUMN `guarantor_id` INT(10) NULL DEFAULT NULL AFTER `salescol`;
+=========
+ALTER TABLE `bdvp`.`sales` 
+ADD COLUMN `type_leasing` VARCHAR(45) NULL AFTER `guarantor_id`;
+=========
+ALTER TABLE `bdvp`.`sales` 
+ADD COLUMN `pay_type` VARCHAR(255) NULL DEFAULT NULL AFTER `type_leasing`;
+========
+ALTER TABLE `bdvp`.`sales` 
+ADD COLUMN `leasing_term` VARCHAR(255) NULL DEFAULT NULL AFTER `pay_type`,
+ADD COLUMN `duration_type` VARCHAR(255) NULL AFTER `leasing_term`;
+===============
+ALTER TABLE `bdvp`.`sales` 
+ADD COLUMN `type_leasing` VARCHAR(255) NULL DEFAULT NULL AFTER `guarantor_id`,
+ADD COLUMN `pay_type` VARCHAR(255) NULL DEFAULT NULL AFTER `type_leasing`,
+ADD COLUMN `leasing_term` VARCHAR(255) NULL DEFAULT NULL AFTER `pay_type`,
+ADD COLUMN `duration_type` VARCHAR(255) NULL DEFAULT NULL AFTER `leasing_term`,
+CHANGE COLUMN `salescol` `guarantor_id` VARCHAR(255) NULL DEFAULT NULL ;
+============
+ALTER TABLE `bdvp`.`payments` 
+ADD COLUMN `pay_gap` VARCHAR(255) NULL DEFAULT NULL AFTER `deleter_id`;
+======
+ALTER TABLE `customers` ADD `identitycard_number_date` VARCHAR(255) NOT NULL AFTER `identity_number`;
+=====
+ALTER TABLE `sales` ADD `price_in_khmer` VARCHAR(255) NULL DEFAULT NULL AFTER `hot_price`;
+=======
+ALTER TABLE `sales` ADD `engine_number` VARCHAR(255) NULL DEFAULT NULL AFTER `vin`;
+ALTER TABLE `sales` ADD `interest_kh` VARCHAR(255) NULL DEFAULT NULL AFTER `interest`;
+=======
+ALTER TABLE `siteprofiles` ADD `site_name_kh` VARCHAR(255) NULL DEFAULT NULL AFTER `line`, ADD `company_kh` VARCHAR(255) NULL DEFAULT NULL AFTER `site_name_kh`, ADD `owner_name_kh` VARCHAR(255) NULL DEFAULT NULL AFTER `company_kh`;
+=========
+ALTER TABLE `sales` ADD `chassis_no` VARCHAR(255) NULL DEFAULT NULL AFTER `vin`;
+======
+- plaque_no
+- type
+- color
+- engine_no
+- chassis_no
+- year
+- cylinder_disp
+- VIN ()
+=========
+ALTER TABLE `sales` ADD `loan_price` VARCHAR(255) NULL DEFAULT NULL AFTER `hot_price`;
+ALTER TABLE `users` ADD `name_kh` VARCHAR(255) NULL DEFAULT NULL AFTER `name`;
+
+ALTER TABLE `support_loan`.`branches` 
+MODIFY COLUMN `address` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL AFTER `id`;
+
+ALTER TABLE `support_loan`.`branches` 
+MODIFY COLUMN `created_at` timestamp(0) NULL DEFAULT NULL AFTER `line`,
+MODIFY COLUMN `updated_at` timestamp(0) NULL DEFAULT NULL AFTER `created_at`,
+MODIFY COLUMN `deleted_at` timestamp(0) NULL DEFAULT NULL AFTER `updated_at`;
+
+ALTER TABLE `support_loan`.`users` ENGINE = InnoDB;
+ALTER TABLE `support_loan`.`customers` ENGINE = InnoDB;
+
+ALTER TABLE `loan_demo`.`sales` 
+ADD COLUMN `currency_type` enum('dollar','riel') NULL AFTER `deposit`;
+
+============
+UPDATE sales SET price = total 
+
+====== ratanakoudom====== 
+ALTER TABLE `sales` 
+ADD COLUMN `admin_fee` double NULL AFTER `operation_fee`;
+ALTER TABLE `sales` 
+MODIFY COLUMN `admin_fee` double(20, 2) NULL DEFAULT NULL AFTER `operation_fee`;
+
+ALTER TABLE `transactions` 
+ADD COLUMN `admin_fee` decimal(20, 2) NULL AFTER `interest_riel`;
+
+ALTER TABLE `sales` 
+ADD COLUMN `contract_type` enum('contract_1','contract_2') NOT NULL AFTER `currency_type`;
+
+ALTER TABLE `collaterals` 
+MODIFY COLUMN `loan_id` int(11) NULL AFTER `id`,
+ADD COLUMN `customer_id` int(11) NOT NULL AFTER `loan_id`,
+ADD COLUMN `collateral_name` varchar(255) NULL AFTER `collateral_type`,
+ADD COLUMN `color` varchar(255) NULL AFTER `collateral_name`;
+
+ALTER TABLE `collaterals` 
+ADD COLUMN `status` enum('using','return') NULL DEFAULT 'using' AFTER `file`,
+ADD COLUMN `return_by` int(11) NULL AFTER `status`,
+ADD COLUMN `description` varchar(255) NULL AFTER `return_by`;
+
+ALTER TABLE `sales` 
+ADD COLUMN `collateral_id` int(11) NOT NULL AFTER `customer_id`;
+
+ALTER TABLE `collaterals` 
+ADD COLUMN `year_of_mfg` year NULL AFTER `licence_type`,
+ADD COLUMN `engine_no` varchar(191) NULL AFTER `year_of_mfg`,
+ADD COLUMN `frame_no` varchar(191) NULL AFTER `engine_no`,
+ADD COLUMN `return_date` date NULL AFTER `status`,
+MODIFY COLUMN `licence_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL AFTER `licence_type`;
+
+ALTER TABLE `collaterals` 
+CHANGE COLUMN `date` `first_date_registeration` date NOT NULL AFTER `frame_no`;
+
+ALTER TABLE `payments` 
+ADD COLUMN `t_saving` double NULL AFTER `saving`;
+ALTER TABLE `payments` 
+ADD COLUMN `payment_status` varchar(255) NULL AFTER `status`;
+
+--transactions
+ALTER TABLE `transactions` 
+ADD COLUMN `payment_status` varchar(255) NULL AFTER `status`;
+--Payment Transaction
+ALTER TABLE `payment_transactions` 
+ADD COLUMN `principle` decimal(20, 2) NOT NULL AFTER `pay_amount`,
+ADD COLUMN `interest` decimal(20, 2) NOT NULL AFTER `principle`,
+ADD COLUMN `insurance` decimal(20, 2) NOT NULL AFTER `interest`,
+ADD COLUMN `status` varchar(255) NULL AFTER `interest`,
+ADD COLUMN `paid_by` varchar(255) NULL AFTER `insurance`;
+---Collateral detail
+ALTER TABLE `collateral_details` 
+ADD COLUMN `status` enum('using','return') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'using' AFTER `file`,
+ADD COLUMN `return_date` date NULL DEFAULT NULL AFTER `status`,
+ADD COLUMN `return_by` int(0) NULL DEFAULT NULL AFTER `return_date`,
+ADD COLUMN `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL AFTER `return_by`;
+
+--Drop Column Collateral
+ALTER TABLE `collaterals` 
+DROP COLUMN `collateral_type`,
+DROP COLUMN `collateral_name`,
+DROP COLUMN `color`,
+DROP COLUMN `licence_type`,
+DROP COLUMN `licence_no`,
+DROP COLUMN `year_of_mfg`,
+DROP COLUMN `engine_no`,
+DROP COLUMN `frame_no`,
+DROP COLUMN `first_date_registeration`,
+DROP COLUMN `file`,
+DROP COLUMN `return_date`,
+DROP COLUMN `description`;
+
+ALTER TABLE `users` 
+ADD COLUMN `phone` varchar(255) NOT NULL AFTER `email`;
+
+ALTER TABLE `customers` 
+ADD COLUMN `customer_relation_issued_by` varchar(255) NULL AFTER `issued_by`;
+ALTER TABLE `customers` 
+ADD COLUMN `customer_relation_nationality` varchar(100) NULL AFTER `nationality`;
+
+ALTER TABLE `guarantors` 
+ADD COLUMN `guarantor_relation_issued_by` varchar(255) NULL AFTER `issued_by`,
+ADD COLUMN `guarantor_relation_nationality` varchar(100) NULL AFTER `nationality`;
+
+ALTER TABLE `branches` 
+ADD COLUMN `village` varchar(255) NULL AFTER `line`,
+ADD COLUMN `commune` varchar(255) NULL AFTER `village`,
+ADD COLUMN `district` varchar(255) NULL AFTER `commune`,
+ADD COLUMN `province` varchar(255) NULL AFTER `district`;
+
+------Clear Table------
+TRUNCATE TABLE sales;
+TRUNCATE TABLE payments;
+TRUNCATE TABLE payoffs;
+TRUNCATE TABLE payment_transactions;
+TRUNCATE TABLE transactions;
+TRUNCATE TABLE collaterals;
+TRUNCATE TABLE collateral_details;
+TRUNCATE TABLE loan_collaterals;
+TRUNCATE TABLE customers;
+TRUNCATE TABLE guarantors;
+TRUNCATE TABLE expenses;
+TRUNCATE TABLE incomes;
+TRUNCATE TABLE group_expenses;
+TRUNCATE TABLE group_incomes;
+TRUNCATE TABLE investments;
+
+=======================================
+CREATE TABLE `expenses` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `branch_id` int(11) DEFAULT NULL,
+  `expense_name` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date` date NOT NULL,
+  `amount` decimal(8,2) NOT NULL,
+  `group_id` int(10) unsigned NOT NULL,
+  `description` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `creator_id` int(10) unsigned DEFAULT NULL,
+  `updater_id` int(10) unsigned DEFAULT NULL,
+  `deleter_id` int(10) unsigned DEFAULT NULL,
+  `currency_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `expenses_group_id_index` (`group_id`),
+  KEY `expenses_creator_id_index` (`creator_id`),
+  KEY `expenses_updater_id_index` (`updater_id`),
+  KEY `expenses_deleter_id_index` (`deleter_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+=========================================
+CREATE TABLE `incomes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `branch_id` int(11) DEFAULT NULL,
+  `name` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date` date NOT NULL,
+  `amount` decimal(8,2) NOT NULL,
+  `group_id` int(10) unsigned DEFAULT NULL,
+  `currency_type` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `creator_id` int(10) unsigned DEFAULT NULL,
+  `updater_id` int(10) unsigned DEFAULT NULL,
+  `deleter_id` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `incomes_income_id_index` (`group_id`),
+  KEY `incomes_creator_id_index` (`creator_id`),
+  KEY `incomes_updater_id_index` (`updater_id`),
+  KEY `incomes_deleter_id_index` (`deleter_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+=============================================
+CREATE TABLE `collateral_details` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `collateral_id` int(11) NOT NULL,
+  `collateral_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `collateral_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `color` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `licence_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `year_of_mfg` year(4) NOT NULL,
+  `engine_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `frame_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `first_date_registeration` date NOT NULL,
+  `file` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` enum('using','return') COLLATE utf8mb4_unicode_ci DEFAULT 'using',
+  `return_date` date DEFAULT NULL,
+  `return_by` int(11) DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `north` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `south` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `west` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `east` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `licence no` int(11) DEFAULT NULL,
+  `licence date` datetime DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+============================
+ALTER TABLE `loan_cse`.`collateral_details` 
+MODIFY COLUMN `licence_date` date NULL DEFAULT NULL AFTER `licence_no`;
+
+============================
+ALTER TABLE `loan_cse`.`provinces` 
+ADD COLUMN `updated_at` timestamp(0) NULL AFTER `user_id`,
+ADD COLUMN `created_at` timestamp(0) NULL AFTER `updated_at`,
+ADD COLUMN `created_by` int(10) NULL AFTER `created_at`,
+ADD COLUMN `updated_by` int(10) NULL AFTER `created_by`;
+ADD COLUMN `deleted_by` int(10) NULL AFTER `updated_by`;
+
+==========================
+ALTER TABLE `loan_cse`.`districts` 
+ADD COLUMN `updated_at` timestamp(0) NULL AFTER `branch_id`,
+ADD COLUMN `created_at` timestamp(0) NULL AFTER `updated_at`,
+ADD COLUMN `created_by` int(10) NULL AFTER `created_at`,
+ADD COLUMN `updated_by` int(10) NULL AFTER `created_by`,
+ADD COLUMN `deleted_by` int(10) NULL AFTER `updated_by`;
+
+===========================
+ALTER TABLE `loan_cse`.`communes` 
+ADD COLUMN `updated_at` timestamp(0) NULL AFTER `branch_id`,
+ADD COLUMN `created_at` timestamp(0) NULL AFTER `updated_at`,
+ADD COLUMN `created_by` int(10) NULL AFTER `created_at`,
+ADD COLUMN `updated_by` int(10) NULL AFTER `created_by`,
+ADD COLUMN `deleted_by` int(10) NULL AFTER `updated_by`;
+
+==========================
+ALTER TABLE `loan_cse`.`villages` 
+ADD COLUMN `updated_at` timestamp(0) NULL AFTER `user_id`,
+ADD COLUMN `created_at` timestamp(0) NULL AFTER `updated_at`,
+ADD COLUMN `created_by` int(10) NULL AFTER `created_at`,
+ADD COLUMN `updated_by` int(10) NULL AFTER `created_by`,
+ADD COLUMN `deleted_by` int(10) NULL AFTER `updated_by`;
+
+==========================
+ALTER TABLE `loan_cse`.`expenses` 
+MODIFY COLUMN `amount` decimal(12, 2) NOT NULL AFTER `date`;
+
+========
+ALTER TABLE `public_holidays` 
+ADD COLUMN `parent_id` int(11) NULL AFTER `branch_id`,
+ADD COLUMN `deleted_at` timestamp NULL AFTER `updated_at`;
+
+============
+ALTER TABLE `loan_kptt`.`customers` 
+ADD COLUMN `cus_no` varchar(10) NULL AFTER `deleter_id`;
+
+===================
+ALTER TABLE `loan_kptt`.`payment_transactions` 
+ADD COLUMN `balance` decimal(20, 2) NULL AFTER `deleted_at`;
+
+==================
+ALTER TABLE `payoffs` 
+ADD COLUMN `balance` decimal(20, 2) NULL AFTER `deleted_at`;
+==================
+ALTER TABLE `investments` 
+MODIFY COLUMN `amount` decimal(12, 2) NOT NULL AFTER `date`;
+=================
+CREATE TABLE `credit_y`.`transfer_loan`  (
+  `id` int NOT NULL,
+  `sale_id` int NULL,
+  `cus_id` int NULL,
+  `old_co_id` int NULL,
+  `paid_principle` decimal(20, 2) NULL,
+  `paid_interest` decimal(20, 2) NULL,
+  `balance` decimal(20, 2) NULL,
+  `transfer_date` datetime NULL,
+  `description` varchar(255) NULL,
+  `transfer_by` varchar(255) NULL,
+  PRIMARY KEY (`id`)
+);
+====================
+ALTER TABLE `credit_y`.`transfer_loan` 
+ADD COLUMN `created_at` timestamp NULL AFTER `transfer_by`,
+ADD COLUMN `updated_at` timestamp NULL AFTER `created_at`,
+ADD COLUMN `deleted_at` timestamp NULL AFTER `updated_at`;
+=================
+ALTER TABLE `credit_y`.`transfer_loan` 
+MODIFY COLUMN `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT FIRST;
+==================
+ALTER TABLE `payment_transactions` 
+ADD COLUMN `advance_fine` decimal(20, 2) NULL AFTER `deleted_at`;
+========================
+ALTER TABLE `payoffs` 
+ADD COLUMN `advance_fine` decimal(20, 2) NULL AFTER `deleted_at`;
+====================
+ALTER TABLE `payments` 
+ADD COLUMN `advance_fine` decimal(20, 2) NULL AFTER `deleted_at`;
+======================
+ALTER TABLE `payment_transactions` 
+ADD COLUMN `penalty` decimal(20, 2) NULL AFTER `balance`;
+=====================
+ALTER TABLE `customers` 
+ADD COLUMN `business_img` varchar(255) NULL AFTER `cus_no`;
+=====================
+ALTER TABLE `guarantors` 
+ADD COLUMN `customer_id` int(10) NULL AFTER `branch_id`;
+====================
+ALTER TABLE `sales` 
+ADD COLUMN `interest_amount` decimal(20, 2) NULL AFTER `interest`;
+===================
+ALTER TABLE `sales` 
+ADD COLUMN `saving_amount` decimal(20, 2) NULL AFTER `saving`;
+===================
+ALTER TABLE `sales` 
+ADD COLUMN `admin_fee_amount` decimal(20, 2) NULL AFTER `admin_fee`;
+===================
+ALTER TABLE `customers` 
+ADD COLUMN `lat` text NULL AFTER `business_img`,
+ADD COLUMN `long` text NULL AFTER `lat`;
+===================
+ALTER TABLE `collateral_details` 
+MODIFY COLUMN `collateral_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL AFTER `collateral_type`;
+===================
+ALTER TABLE `loan_duration_types` 
+ADD COLUMN `deleted_at` timestamp NULL AFTER `updated_at`;
+===============================================================
+ALTER TABLE `sales` 
+ADD COLUMN `is_reschedule`   varchar(255) AFTER `updated_at`;
+====================================================================
+ALTER TABLE `payments` 
+ADD COLUMN `reschedule_status` varchar(255) AFTER `updated_at`;
+====================================================================
+vichai Query 28/8/2023
+====================================================================
+
+ALTER TABLE `collateral_details`
+ADD COLUMN `price` decimal(20,2) AFTER `updated_at`;
+ADD COLUMN `size` varchar(255) AFTER `price`;
+
+====================================================================

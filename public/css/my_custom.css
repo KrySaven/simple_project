@@ -1,0 +1,59 @@
+.add_product {
+    font-size: 31px !important;
+    color: #217201 !important;
+}
+
+.show_number {
+    padding: 10px;
+    height: auto !important;
+    border-radius: 5px;
+}
+
+.card .header {
+    padding: 17px !important;
+}
+
+.icon_detail {
+    color: #0d4e82;
+}
+
+.icon_verifty {
+    color: #217201;
+}
+
+.icon_reject {
+    color: #ffae00;
+}
+
+.icon_delete {
+    color: red;
+}
+
+.trash_icon {
+    background: red;
+    color: #fff;
+    padding: 2px;
+    border-radius: 2px;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #f4f8fa;
+}
+
+tr {
+    text-align: center;
+}
+
+.number_of {
+    position: absolute;
+    right: 4px;
+    color: red;
+    font-size: 19px;
+}
+
+span.status_priorty {
+    color: #fff;
+    padding: 8px;
+    background: #007000;
+    border-radius: 3px;
+}

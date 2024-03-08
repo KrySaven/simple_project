@@ -1,0 +1,66 @@
+ALTER TABLE `customers`
+ADD COLUMN `identity_number`  varchar(25) NULL AFTER `email`,
+ADD COLUMN `identity`  varchar(255) NULL AFTER `url`;
+========================
+ALTER TABLE `users`
+ADD COLUMN `profile`  varchar(255) NULL AFTER `remember_token`;
+
+==========
+ALTER TABLE `sales`
+ADD COLUMN `product_name`  varchar(255) NULL AFTER `date`,
+ADD COLUMN `serial`  varchar(50) NULL AFTER `product_name`;
+====
+ALTER TABLE `payments`
+MODIFY COLUMN `actual_date`  date NULL AFTER `payment_date`,
+MODIFY COLUMN `add_by`  varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL AFTER `user_id`;
+===========
+ALTER TABLE `sales`
+ADD COLUMN `is_complete`  tinyint(4) NULL DEFAULT 0 AFTER `status`;
+=======
+ALTER TABLE `payments`
+ADD COLUMN `no`  int(10) NULL AFTER `payment_date`;
+=============
+ALTER TABLE `payments`
+ADD COLUMN `balance`  decimal(8,2) NULL AFTER `total`;
+============
+ALTER TABLE `payments`
+ADD COLUMN `t_amount`  decimal(8,2) NULL AFTER `amount`,
+ADD COLUMN `t_interest`  decimal(8,2) NULL AFTER `interest`;
+
+ALTER TABLE `payments` 
+ADD COLUMN `reverse_by` int(255) NULL AFTER `paid_off_date`;
+
+ALTER TABLE `transactions` 
+ADD COLUMN `payment_transaction_id` int(11) NOT NULL AFTER `branch_id`;
+
+ALTER TABLE `transactions` 
+ADD COLUMN `is_cancel` tinyint(2) NOT NULL DEFAULT 0 AFTER `description`;
+
+ALTER TABLE `sales` 
+ADD COLUMN `approve_status` enum('pending','approved','reject') NULL DEFAULT 'pending' AFTER `status`;
+================ Clear Data=====================
+
+TRUNCATE TABLE customers;
+TRUNCATE TABLE dealers;
+TRUNCATE TABLE expenses;
+TRUNCATE TABLE group_expenses;
+TRUNCATE TABLE journals;
+TRUNCATE TABLE loans;
+TRUNCATE TABLE payments;
+TRUNCATE TABLE sales;
+TRUNCATE TABLE salesmen;
+TRUNCATE TABLE timelines;
+TRUNCATE TABLE timline_details;
+TRUNCATE TABLE transactions;
+TRUNCATE TABLE guarantors;
+TRUNCATE TABLE incomes;
+TRUNCATE TABLE investments;
+TRUNCATE TABLE group_incomes;
+TRUNCATE TABLE payment_transactions;
+TRUNCATE TABLE collaterals;
+TRUNCATE TABLE collateral_details;
+TRUNCATE TABLE loan_collaterals;
+TRUNCATE TABLE payoffs;
+TRUNCATE TABLE public_holidays;
+
+
