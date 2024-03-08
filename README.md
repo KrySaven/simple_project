@@ -1,6 +1,3 @@
-# angkortep_purchasing
-
-
 
 ## Getting started
 
